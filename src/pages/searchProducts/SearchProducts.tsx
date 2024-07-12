@@ -49,7 +49,7 @@ const SearchProducts = () => {
                 }
             </div>
         } else {
-            content = <h1>No Products Found</h1>
+            content = <h1 className="mt-5 text-center md:text-4xl text-2xl font-semibold text-[#597D35]">No Products Found</h1>
         }
     }
 

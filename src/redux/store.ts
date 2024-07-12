@@ -5,7 +5,8 @@ import productsSlice from './features/products/productsSlice';
 export const store = configureStore({
     reducer: {
         [baseApi.reducerPath]: baseApi.reducer,
-        products: productsSlice
+        products: productsSlice,
+        productList: productsSlice
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(baseApi.middleware),

@@ -10,6 +10,10 @@ const Navbar = () => {
     const handleSearch = (e: FormEvent) => {
         e.preventDefault();
 
+        if (!search) {
+            return;
+        }
+
         navigate(`/search-products/${search}`);
     }
 
@@ -40,11 +44,13 @@ const Navbar = () => {
                         <BsCart3 className="size-5 md:size-7"></BsCart3>
                     </button>
                     <button>
-                        <div className="avatar">
-                            <div className="w-10 md:w-12 rounded-full">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        <NavLink to="/product-list">
+                            <div className="avatar">
+                                <div className="w-10 md:w-12 rounded-full">
+                                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                </div>
                             </div>
-                        </div>
+                        </NavLink>
                     </button>
                 </div>
             </div>

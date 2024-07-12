@@ -1,5 +1,5 @@
 import { baseApi } from "../../api/baseApi";
-import { setProducts } from "./productsSlice";
+import { filteredProducts, productsList, setProducts } from "./productsSlice";
 
 const productsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -11,6 +11,7 @@ const productsApi = baseApi.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
                 dispatch(setProducts(result.data));
+                dispatch(productsList(result.data));
             },
         }),
 
@@ -18,7 +19,33 @@ const productsApi = baseApi.injectEndpoints({
             query: (page) => ({
                 url: `/product?page=${page}`,
                 method: 'GET'
-            })
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                const result = await queryFulfilled;
+                dispatch(setProducts(result.data));
+            },
+        }),
+
+        getProductsByFilter: builder.mutation({
+            query: (amount) => ({
+                url: `/product-filter?amount=${amount}`,
+                method: 'GET'
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                const result = await queryFulfilled;
+                dispatch(filteredProducts(result.data));
+            },
+        }),
+
+        getProductsActionsPost: builder.mutation({
+            query: (page) => ({
+                url: `/product?page=${page}`,
+                method: 'GET'
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                const result = await queryFulfilled;
+                dispatch(productsList(result.data));
+            },
         }),
 
         getSingleProduct: builder.query({
@@ -40,6 +67,8 @@ const productsApi = baseApi.injectEndpoints({
 export const {
     useGetAllProductsQuery,
     useGetAllProductsByPostMutation,
+    useGetProductsActionsPostMutation,
+    useGetProductsByFilterMutation,
     useGetSingleProductQuery,
     useSearchProductQuery
 }: any = productsApi;
