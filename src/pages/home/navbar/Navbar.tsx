@@ -1,16 +1,16 @@
 import { BsSearch, BsCart3 } from "react-icons/bs";
 import brandLogo from '../../../assets/brandLogo.png'
 import { FormEvent, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-
+    const navigate = useNavigate();
     const [search, setSearch] = useState("");
 
     const handleSearch = (e: FormEvent) => {
         e.preventDefault();
 
-        console.log(search);
+        navigate(`/search-products/${search}`);
     }
 
 

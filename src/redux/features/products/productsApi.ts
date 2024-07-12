@@ -27,11 +27,19 @@ const productsApi = baseApi.injectEndpoints({
                 method: 'GET'
             })
         }),
+
+        searchProduct: builder.query({
+            query: (name) => ({
+                url: `/search-products?searchItem=${name}`,
+                method: 'GET'
+            })
+        }),
     })
 });
 
 export const {
     useGetAllProductsQuery,
     useGetAllProductsByPostMutation,
-    useGetSingleProductQuery
+    useGetSingleProductQuery,
+    useSearchProductQuery
 }: any = productsApi;
