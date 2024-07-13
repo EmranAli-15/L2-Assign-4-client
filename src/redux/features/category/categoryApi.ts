@@ -1,9 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
 const categoryApi = baseApi.injectEndpoints({
-
-    tagType: ['category'],
-
     endpoints: (builder) => ({
         createCategory: builder.mutation({
             query: (data) => ({
@@ -36,4 +33,4 @@ export const {
     useCreateCategoryMutation,
     useGetAllCategoryQuery,
     useGetCategoryProductsQuery
-}: any = categoryApi;
+} = categoryApi;

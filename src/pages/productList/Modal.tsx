@@ -9,7 +9,7 @@ const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function, 
         editModal(!edit);
     }
 
-    const { data, isLoading } = useGetAllCategoryQuery();
+    const { data, isLoading } = useGetAllCategoryQuery(undefined);
 
     let content
     if (!isLoading && data) {

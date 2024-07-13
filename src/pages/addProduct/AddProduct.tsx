@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const AddProduct = () => {
 
-    const { data, isLoading } = useGetAllCategoryQuery();
+    const { data, isLoading } = useGetAllCategoryQuery(undefined);
     const [createProduct] = useCreateProductMutation();
     const [createCategory] = useCreateCategoryMutation()
 
@@ -67,7 +67,7 @@ const AddProduct = () => {
         };
 
         if (!newCategory || !newCategoryImage) {
-            console.log('asdlkfj')
+            // console.log('asdlkfj')
         } else {
             const process = await createCategory(data);
             if (process.data.success == true) {
@@ -87,13 +87,11 @@ const AddProduct = () => {
         <div>
 
             <div>
-                <dialog id="my_modal_1" className="modal">
+                <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+                <div className="modal" role="dialog">
                     <div className="modal-box">
-
-                        <div className="modal-action -mt-5">
-                            <form method="dialog">
-                                <button className="btn btn-sm">Close</button>
-                            </form>
+                        <div className="modal-action">
+                            <label htmlFor="my_modal_6" className="btn">Close!</label>
                         </div>
 
                         <label htmlFor="">Category Name:</label><br />
@@ -107,19 +105,14 @@ const AddProduct = () => {
                             </div>
                         </div>
                     </div>
-                </dialog>
+                </div>
             </div>
-
-
 
             <div className="max-w-7xl mx-auto my-10">
                 <div className="flex justify-end">
-                    <button
-                        onClick={() => document.getElementById('my_modal_1').showModal()}
-                        className="h-10 border rounded">Needs new category?
-                    </button>
+                    <label htmlFor="my_modal_6" className="flex items-center h-10 border rounded-lg cursor-pointer">Needs new category?</label>
                 </div>
-                <form onSubmit={onSubmit} className="mx-2 md:mx-0">
+                <form onSubmit={onSubmit} className="mx-2 md:mx-0"> 
                     <div className="md:flex justify-between gap-x-3">
                         <div className="md:w-[50%]">
                             <label>Title</label><br />

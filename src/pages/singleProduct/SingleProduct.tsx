@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../redux/features/products/productsApi";
-import Rating from "react-rating";
-import { FaStar, FaStarHalf, FaPlus, FaMinus } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useState } from "react";
 import SingleProductLoader from "../../loader/SingleProductLoader";
+import ReactStars from 'react-rating-star-with-type'
 
 const SingleProduct = () => {
     const { id } = useParams();
@@ -27,7 +27,7 @@ const SingleProduct = () => {
     }
 
     if (!isLoading && data) {
-        const { image, title, description, rating, quantity, price, _id, category } = data.data;
+        const { image, title, description, price, category, rating } = data.data;
         content = <>
             <div className="md:flex justify-center">
 
@@ -65,12 +65,10 @@ const SingleProduct = () => {
 
                     <div className="mt-5 md:mt-0">
                         <h3 className="text-gray-600 text-xl">Category : {category}</h3>
-                        <Rating
-                            readonly
-                            placeholderRating={rating}
-                            emptySymbol={<FaStarHalf className='text-transparent'></FaStarHalf>}
-                            placeholderSymbol={<FaStar className='text-orange-400'></FaStar>}
-                            fullSymbol={<FaStar className="bg-gray-400"></FaStar>}
+                        <ReactStars
+                            value={rating}
+                            isEdit={true}
+                            activeColors={["red", "orange", "#FFCE00", "#9177FF", "#8568FC",]}
                         />
                     </div>
 

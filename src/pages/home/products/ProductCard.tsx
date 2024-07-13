@@ -1,11 +1,10 @@
-import { FaStar, FaStarHalf } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
 import { TbCurrencyTaka } from "react-icons/tb";
-import Rating from "react-rating";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
 import { addToCart } from "../../../redux/features/cart/cartSlice";
 import Swal from "sweetalert2";
+import ReactStars from 'react-rating-star-with-type'
 
 type TProducts = {
     id: string
@@ -18,7 +17,7 @@ type TProducts = {
 }
 
 
-const ProductCard = ({ id, title, rating, price, image, quantity }: TProducts) => {
+const ProductCard = ({ id, title, price, image, quantity, rating }: TProducts) => {
 
     const dispatch = useAppDispatch();
 
@@ -63,13 +62,11 @@ const ProductCard = ({ id, title, rating, price, image, quantity }: TProducts) =
 
                     <div className="flex justify-between items-center md:mt-2">
                         <div className="text-[12px] md:text-[15px]">
-                            <Rating
-                                readonly
-                                placeholderRating={rating}
-                                emptySymbol={<FaStarHalf className='text-transparent'></FaStarHalf>}
-                                placeholderSymbol={<FaStar className='text-orange-400'></FaStar>}
-                                fullSymbol={<FaStar className="bg-gray-400"></FaStar>}
-                            />
+                        <ReactStars
+                            value={rating}
+                            isEdit={true}
+                            activeColors={["red", "orange", "#FFCE00", "#9177FF", "#8568FC",]}
+                        />
                         </div>
 
                         <div className="card-actions justify-end">

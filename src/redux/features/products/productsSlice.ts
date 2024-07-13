@@ -28,6 +28,7 @@ const productSlice = createSlice({
             state.productsList = added;
         },
         setProductListNull: (state, action) => {
+            action
             state.productsList = [];
         }
     }

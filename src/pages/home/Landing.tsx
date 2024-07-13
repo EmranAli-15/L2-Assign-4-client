@@ -5,14 +5,14 @@ import Products from "./products/Products";
 
 const Landing = () => {
 
-    const { data, isLoading } = useGetAllCategoryQuery();
+    const { data, isLoading } = useGetAllCategoryQuery(undefined);
 
 
     let content
     if (!isLoading && data) {
         content = <div className='flex items-center gap-x-10'>
             {
-                data.data.map((item) => {
+                data.data.map((item: any) => {
                     return <div key={item._id}>
                         <NavLink to={`/category-products/${item.category}`}>
                             <div className='md:h-[100px] md:w-[100px] h-[80px] w-[80px]'>

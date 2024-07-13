@@ -2,7 +2,6 @@ import { baseApi } from "../../api/baseApi";
 import { filteredProducts, productsList, setProductListNull, setProducts } from "./productsSlice";
 
 export const productsApi = baseApi.injectEndpoints({
-    tagTypes: ["productUpdate", "productAdd"],
 
     endpoints: (builder) => ({
         createProduct: builder.mutation({
@@ -22,6 +21,7 @@ export const productsApi = baseApi.injectEndpoints({
             providesTags: ['productUpdate'],
 
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                arg
                 const result = await queryFulfilled;
                 dispatch(setProducts(result.data));
                 dispatch(productsList(result.data));
@@ -35,6 +35,7 @@ export const productsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['productUpdate', 'productAdd'],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                arg
                 const result = await queryFulfilled;
                 dispatch(setProducts(result.data));
             },
@@ -46,6 +47,7 @@ export const productsApi = baseApi.injectEndpoints({
                 method: 'GET'
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                arg
                 const result = await queryFulfilled;
                 dispatch(filteredProducts(result.data));
             },
@@ -57,6 +59,7 @@ export const productsApi = baseApi.injectEndpoints({
                 method: 'GET'
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                arg
                 const result = await queryFulfilled;
                 dispatch(productsList(result.data));
             },
@@ -85,6 +88,8 @@ export const productsApi = baseApi.injectEndpoints({
                 })
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                arg
+                queryFulfilled
                 dispatch(setProductListNull(null))
             },
             invalidatesTags: ["productUpdate"],
@@ -98,6 +103,8 @@ export const productsApi = baseApi.injectEndpoints({
                 })
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                arg
+                queryFulfilled
                 dispatch(setProductListNull(null))
             },
             invalidatesTags: ["productUpdate"],
@@ -115,4 +122,4 @@ export const {
     useSearchProductQuery,
     useUpdateProductMutation,
     useDeleteProductMutation,
-}: any = productsApi;
+} = productsApi;
