@@ -6,6 +6,8 @@ import SearchProducts from "../pages/searchProducts/SearchProducts";
 import ProductList from "../pages/productList/ProductList";
 import CategoryProducts from "../pages/categoryProducts/CategoryProducts";
 import AddProduct from "../pages/addProduct/AddProduct";
+import AddToCart from "../pages/addtoCart/AddToCart";
+import BuyNow from "../pages/addtoCart/BuyNow";
 
 export const router = createBrowserRouter([
     {
@@ -36,6 +38,14 @@ export const router = createBrowserRouter([
             {
                 path: '/add-product',
                 element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/cart',
+                element: <AddToCart></AddToCart>
+            },
+            {
+                path: '/buyNow',
+                element: <BuyNow></BuyNow>
             }
         ]
     }

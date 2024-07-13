@@ -2,6 +2,7 @@ import { BsSearch, BsCart3 } from "react-icons/bs";
 import brandLogo from '../../../assets/brandLogo.png'
 import { FormEvent, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hooks";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -16,6 +17,8 @@ const Navbar = () => {
 
         navigate(`/search-products/${search}`);
     }
+
+    const { products } = useAppSelector(state => state.cart);
 
 
     return (
@@ -39,10 +42,12 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end flex items-center gap-x-12">
-                    <button className="relative">
-                        <div className="badge bg-[#597D35] text-white font-semibold absolute translate-x-1/2 -translate-y-2">7</div>
-                        <BsCart3 className="size-5 md:size-7"></BsCart3>
-                    </button>
+                    <NavLink to="/cart">
+                        <button className="relative">
+                            <div className="badge bg-[#597D35] text-white font-semibold absolute translate-x-1/2 -translate-y-2">{products.length}</div>
+                            <BsCart3 className="size-5 md:size-7"></BsCart3>
+                        </button>
+                    </NavLink>
                     <button>
                         <NavLink to="/product-list">
                             <div className="avatar">

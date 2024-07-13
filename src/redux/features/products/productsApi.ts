@@ -2,7 +2,7 @@ import { baseApi } from "../../api/baseApi";
 import { filteredProducts, productsList, setProductListNull, setProducts } from "./productsSlice";
 
 export const productsApi = baseApi.injectEndpoints({
-    tagType: ["productUpdate", "productAdd"],
+    tagTypes: ["productUpdate", "productAdd"],
 
     endpoints: (builder) => ({
         createProduct: builder.mutation({
@@ -11,7 +11,7 @@ export const productsApi = baseApi.injectEndpoints({
                 body: data,
                 method: 'POST'
             }),
-            providesTags: ['productAdd'],
+            invalidatesTags: ['productAdd'],
         }),
 
         getAllProducts: builder.query({
@@ -33,7 +33,7 @@ export const productsApi = baseApi.injectEndpoints({
                 url: `/product?page=${page}`,
                 method: 'GET'
             }),
-            providesTags: ['productUpdate', 'productAdd'],
+            invalidatesTags: ['productUpdate', 'productAdd'],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
                 dispatch(setProducts(result.data));
