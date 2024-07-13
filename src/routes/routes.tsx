@@ -5,6 +5,7 @@ import SingleProduct from "../pages/singleProduct/SingleProduct";
 import SearchProducts from "../pages/searchProducts/SearchProducts";
 import ProductList from "../pages/productList/ProductList";
 import CategoryProducts from "../pages/categoryProducts/CategoryProducts";
+import AddProduct from "../pages/addProduct/AddProduct";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: '/category-products/:category',
                 element: <CategoryProducts></CategoryProducts>
+            },
+            {
+                path: '/add-product',
+                element: <AddProduct></AddProduct>
             }
         ]
     }

@@ -2,15 +2,24 @@ import { baseApi } from "../../api/baseApi";
 import { filteredProducts, productsList, setProductListNull, setProducts } from "./productsSlice";
 
 export const productsApi = baseApi.injectEndpoints({
-    tagType: ["productUpdate"],
+    tagType: ["productUpdate", "productAdd"],
 
     endpoints: (builder) => ({
+        createProduct: builder.mutation({
+            query: (data) => ({
+                url: '/product',
+                body: data,
+                method: 'POST'
+            }),
+            providesTags: ['productAdd'],
+        }),
+
         getAllProducts: builder.query({
             query: (page) => ({
                 url: `/product?page=${page}`,
                 method: 'GET'
             }),
-            providesTags:['productUpdate'],
+            providesTags: ['productUpdate'],
 
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
@@ -24,6 +33,7 @@ export const productsApi = baseApi.injectEndpoints({
                 url: `/product?page=${page}`,
                 method: 'GET'
             }),
+            providesTags: ['productUpdate', 'productAdd'],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
                 dispatch(setProducts(result.data));
@@ -77,17 +87,32 @@ export const productsApi = baseApi.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 dispatch(setProductListNull(null))
             },
-            invalidatesTags:["productUpdate"],
+            invalidatesTags: ["productUpdate"],
+        }),
+
+        deleteProduct: builder.mutation({
+            query: (id) => {
+                return ({
+                    url: `/product-delete/${id}`,
+                    method: 'DELETE'
+                })
+            },
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                dispatch(setProductListNull(null))
+            },
+            invalidatesTags: ["productUpdate"],
         }),
     })
 });
 
 export const {
+    useCreateProductMutation,
     useGetAllProductsQuery,
     useGetAllProductsByPostMutation,
     useGetProductsActionsPostMutation,
     useGetProductsByFilterMutation,
     useGetSingleProductQuery,
     useSearchProductQuery,
-    useUpdateProductMutation
+    useUpdateProductMutation,
+    useDeleteProductMutation,
 }: any = productsApi;

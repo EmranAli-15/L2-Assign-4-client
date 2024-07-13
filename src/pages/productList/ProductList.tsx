@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useGetAllProductsQuery, useGetProductsActionsPostMutation } from "../../redux/features/products/productsApi";
+import { useDeleteProductMutation, useGetAllProductsQuery, useGetProductsActionsPostMutation } from "../../redux/features/products/productsApi";
 import { useAppSelector } from "../../redux/hooks";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import Modal from "./Modal";
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
 
 type TProducts = {
@@ -21,6 +23,7 @@ const ProductList = () => {
 
   const { } = useGetAllProductsQuery(1);
   const [getProductsActionsPost] = useGetProductsActionsPostMutation();
+  const [deleteProduct] = useDeleteProductMutation();
   const { productsList } = useAppSelector(state => state.productList);
 
   const [page, setPage] = useState(2)
@@ -33,9 +36,31 @@ const ProductList = () => {
 
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState(null);
-  const editModal = (item) => {
+  const editModal = (item: any) => {
     setEdit(!edit);
     setData(item)
+  }
+
+
+  const deleteItem = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(id);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
   }
 
   return (
@@ -46,6 +71,13 @@ const ProductList = () => {
 
 
       <div className={`${edit && 'overflow-hidden'} max-w-7xl mx-auto pt-10 md:pt-20`}>
+      <div className="flex justify-end mr-[5%] md:mr-[0]">
+        <NavLink to="/add-product">
+        <button className="btn bg-[#597D35] text-white">
+          Add Product
+        </button>
+        </NavLink>
+      </div>
         <div className="overflow-x-auto">
           <table className="table">
             <tbody>
@@ -76,13 +108,13 @@ const ProductList = () => {
 
                   <td>
                     <button
-                      onClick={()=>editModal(item)}
+                      onClick={() => editModal(item)}
                       className="btn btn-ghost hover:bg-transparent hover:text-[#e2b457] btn-xs"><FaRegEdit size={20}></FaRegEdit>
                     </button>
                   </td>
 
                   <td>
-                    <button className="btn btn-ghost hover:bg-transparent hover:text-red-500 btn-xs"><FaRegTrashAlt size={20}></FaRegTrashAlt></button>
+                    <button onClick={() => deleteItem(item._id)} className="btn btn-ghost hover:bg-transparent hover:text-red-500 btn-xs"><FaRegTrashAlt size={20}></FaRegTrashAlt></button>
                   </td>
                 </tr>)
               }

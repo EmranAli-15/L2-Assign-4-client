@@ -1,9 +1,10 @@
 import { FormEvent } from "react";
 import { useGetAllCategoryQuery } from "../../redux/features/category/categoryApi";
 import { useUpdateProductMutation } from "../../redux/features/products/productsApi";
+import { CiCircleRemove } from "react-icons/ci";
 
-const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function }) => {
-    const [updateProduct, { isSuccess }] = useUpdateProductMutation()
+const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function, item: any }) => {
+    const [updateProduct] = useUpdateProductMutation()
     const fn = () => {
         editModal(!edit);
     }
@@ -14,7 +15,7 @@ const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function }
     if (!isLoading && data) {
         content = <>
             {
-                data.data.map(it => {
+                data.data.map((it: any) => {
                     return <option key={it._id} value={it.category}>{it.category}</option>
                 })
             }
@@ -37,16 +38,10 @@ const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function }
             title, price, description, category
         };
 
-        console.log(data, id)
+        const process = await updateProduct({ data, id });
 
-        const process = await updateProduct({data, id});
-
-        console.log(process);
-        if(isSuccess){
-            console.log('Yeaa hoo!!');
-        }
-        if(isSuccess){
-            console.log('Yeaa hoo!!');
+        if (process.data.success == true) {
+            fn()
         }
     }
 
@@ -57,6 +52,12 @@ const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function }
             </div>
 
             <form onSubmit={onSubmit} className="translate-x-[5%] md:translate-x-1/2 translate-y-1/2 w-[90%] md:w-[50%] bg-white rounded-lg shadow-2xl absolute z-20 p-5">
+                <div className="absolute right-1 top-0">
+                    <button onClick={fn}>
+                        <CiCircleRemove size={24} className="text-red-500 font-bold"></CiCircleRemove>
+                    </button>
+                </div>
+
                 <div className="md:flex justify-between gap-x-3">
                     <div className=" md:w-[50%]">
                         <label>Title</label><br />
@@ -86,8 +87,8 @@ const Modal = ({ edit, editModal, item }: { edit: Boolean, editModal: Function }
                     </div>
                 </div>
 
-                <div>
-                    <button type="submit" className="btn">click</button>
+                <div className="flex justify-end mt-5">
+                    <button type="submit" className="btn">Update</button>
                 </div>
             </form>
         </div>
