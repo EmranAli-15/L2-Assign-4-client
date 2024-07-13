@@ -1,13 +1,17 @@
 import { baseApi } from "../../api/baseApi";
-import { filteredProducts, productsList, setProducts } from "./productsSlice";
+import { filteredProducts, productsList, setProductListNull, setProducts } from "./productsSlice";
 
-const productsApi = baseApi.injectEndpoints({
+export const productsApi = baseApi.injectEndpoints({
+    tagType: ["productUpdate"],
+
     endpoints: (builder) => ({
         getAllProducts: builder.query({
             query: (page) => ({
                 url: `/product?page=${page}`,
                 method: 'GET'
             }),
+            providesTags:['productUpdate'],
+
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
                 dispatch(setProducts(result.data));
@@ -61,6 +65,20 @@ const productsApi = baseApi.injectEndpoints({
                 method: 'GET'
             })
         }),
+
+        updateProduct: builder.mutation({
+            query: ({ data, id }) => {
+                return ({
+                    url: `/product-update/${id}`,
+                    body: data,
+                    method: 'PATCH'
+                })
+            },
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                dispatch(setProductListNull(null))
+            },
+            invalidatesTags:["productUpdate"],
+        }),
     })
 });
 
@@ -70,5 +88,6 @@ export const {
     useGetProductsActionsPostMutation,
     useGetProductsByFilterMutation,
     useGetSingleProductQuery,
-    useSearchProductQuery
+    useSearchProductQuery,
+    useUpdateProductMutation
 }: any = productsApi;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useGetAllProductsByPostMutation, useGetAllProductsQuery, useGetProductsByFilterMutation } from "../../../redux/features/products/productsApi";
-import { setProducts } from "../../../redux/features/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 import ProductCard from "./ProductCard";
 import { FaFilter } from "react-icons/fa";
 

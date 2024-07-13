@@ -4,6 +4,7 @@ import Prime from "../layout/Prime";
 import SingleProduct from "../pages/singleProduct/SingleProduct";
 import SearchProducts from "../pages/searchProducts/SearchProducts";
 import ProductList from "../pages/productList/ProductList";
+import CategoryProducts from "../pages/categoryProducts/CategoryProducts";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
             {
                 path: '/product-list',
                 element: <ProductList></ProductList>
+            },
+            {
+                path: '/category-products/:category',
+                element: <CategoryProducts></CategoryProducts>
             }
         ]
     }

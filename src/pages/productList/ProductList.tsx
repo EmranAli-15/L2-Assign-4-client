@@ -38,7 +38,6 @@ const ProductList = () => {
     setData(item)
   }
 
-
   return (
     <div>
       <div>
@@ -46,7 +45,7 @@ const ProductList = () => {
       </div>
 
 
-      <div className="max-w-7xl mx-auto pt-10 md:pt-20">
+      <div className={`${edit && 'overflow-hidden'} max-w-7xl mx-auto pt-10 md:pt-20`}>
         <div className="overflow-x-auto">
           <table className="table">
             <tbody>

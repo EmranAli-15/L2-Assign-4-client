@@ -27,8 +27,11 @@ const productSlice = createSlice({
             const added = [...state.productsList, ...products]
             state.productsList = added;
         },
+        setProductListNull: (state, action) => {
+            state.productsList = [];
+        }
     }
 });
 
-export const { setProducts, filteredProducts, productsList } = productSlice.actions;
+export const { setProducts, filteredProducts, productsList, setProductListNull } = productSlice.actions;
 export default productSlice.reducer;
