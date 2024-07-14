@@ -5,6 +5,9 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { useState } from "react";
 import SingleProductLoader from "../../loader/SingleProductLoader";
 import ReactStars from 'react-rating-star-with-type'
+import { useAppDispatch } from "../../redux/hooks";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+import Swal from "sweetalert2";
 
 const SingleProduct = () => {
     const { id } = useParams();
@@ -20,6 +23,20 @@ const SingleProduct = () => {
         }
     }
 
+    const dispatch = useAppDispatch();
+
+    const addCart = (id: string, title: string, price: number, image: string) => {
+        dispatch(addToCart({ id, title, image, price }));
+
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Added",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
     let content;
 
     if (isLoading) {
@@ -27,7 +44,7 @@ const SingleProduct = () => {
     }
 
     if (!isLoading && data) {
-        const { image, title, description, price, category, rating } = data.data;
+        const { image, title, description, price, category, rating, _id } = data.data;
         content = <>
             <div className="md:flex justify-center">
 
@@ -55,9 +72,10 @@ const SingleProduct = () => {
                                 <button onClick={() => handleQuantity('inc')} className="w-[30px] h-[45px] bg-[#597D35] text-white flex items-center justify-center"><FaPlus></FaPlus></button>
                             </div>
                             <div>
-                                <div className="btn hover:bg-[#e2b457] h-[45px] bg-[#597D35] text-white flex items-center justify-center">
+                                {/*   */}
+                                <button onClick={() => addCart(_id, title, price, image)} className="btn hover:bg-[#e2b457] h-[45px] bg-[#597D35] text-white flex items-center justify-center">
                                     Add to cart
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>

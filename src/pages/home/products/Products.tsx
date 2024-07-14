@@ -16,6 +16,7 @@ type TProducts = {
 
 const Products = () => {
   const { products } = useAppSelector(state => state.products);
+  const [stop, setStop] = useState(false);
 
   const { } = useGetAllProductsQuery(1);
 
@@ -30,6 +31,7 @@ const Products = () => {
   };
 
   const getFilteredProducts = (amount: string) => {
+    setStop(true);
     getProductsByFilter(amount);
   }
 
@@ -38,11 +40,11 @@ const Products = () => {
     <div className="max-w-7xl mx-auto">
 
       <div className="flex items-center justify-between">
-        <h1 className="ml-2 md:ml-0 text-3xl md:text-4xl font-serif md:my-5 font-semibold text-[#597D35]">All Products</h1>
+        <h1 className="ml-2 md:ml-0 text-2xl md:text-4xl font-serif md:my-5 font-semibold text-[#597D35]">All Products</h1>
 
         <div className="dropdown dropdown-hover">
-          <div tabIndex={0} role="button" className="btn m-1 bg-[#597D35] hover:bg-[#e2b457] text-white text-lg">Filter <FaFilter size={16}></FaFilter></div>
-          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+          <div tabIndex={0} role="button" className="flex items-center justify-center w-[70px] h-[35px] rounded-md m-1 bg-[#597D35] hover:bg-[#e2b457] text-white text-lg">Filter <FaFilter size={16}></FaFilter></div>
+          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box -ml-[70px] z-[1] shadow">
             <li>
               <button onClick={() => getFilteredProducts('lessThenHundred')}>Less 100 TK</button>
             </li>
@@ -74,7 +76,7 @@ const Products = () => {
 
       <div className="flex justify-center my-10">
         <div className="text-center">
-          <button className="btn hover:bg-[#e2b457] bg-[#597D35] text-white font-semibold px-6 py-3 rounded-md" onClick={getMoreProducts}>
+          <button className={`${stop && 'hidden'} btn hover:bg-[#e2b457] bg-[#597D35] text-white font-semibold px-6 py-3 rounded-md`} onClick={getMoreProducts}>
             More
           </button>
         </div>

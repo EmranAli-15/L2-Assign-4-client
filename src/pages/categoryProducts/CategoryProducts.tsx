@@ -49,7 +49,7 @@ const CategoryProducts = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto my-20">
             {content}
         </div>
     );

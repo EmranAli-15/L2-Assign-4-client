@@ -33,7 +33,7 @@ const BuyNow = () => {
         }
     }
     return (
-        <div className="max-w-7xl mx-auto my-10">
+        <div className="max-w-7xl mx-auto my-20">
             <div className="md:w-[60%] mx-auto border shadow-xl rounded p-10">
                 <div className="md:flex justify-between gap-x-3">
                     <div className="md:w-[50%]">

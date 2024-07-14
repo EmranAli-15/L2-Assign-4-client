@@ -29,11 +29,12 @@ export const productsApi = baseApi.injectEndpoints({
         }),
 
         getAllProductsByPost: builder.mutation({
-            query: (page) => ({
-                url: `/product?page=${page}`,
-                method: 'GET'
-            }),
-            invalidatesTags: ['productUpdate', 'productAdd'],
+            query: (page) => {
+                return ({
+                    url: `/product?page=${page}`,
+                    method: 'GET'
+                })
+            },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 arg
                 const result = await queryFulfilled;

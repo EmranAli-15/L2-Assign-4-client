@@ -70,53 +70,60 @@ const ProductList = () => {
       </div>
 
 
-      <div className={`${edit && 'overflow-hidden'} max-w-7xl mx-auto pt-10 md:pt-20`}>
-      <div className="flex justify-end mr-[5%] md:mr-[0]">
-        <NavLink to="/add-product">
-        <button className="btn bg-[#597D35] text-white">
-          Add Product
-        </button>
-        </NavLink>
-      </div>
-        <div className="overflow-x-auto">
-          <table className="table">
+      <div className={`${edit && ''} max-w-7xl mx-auto pt-10 md:pt-20 overflow-hidden whitespace-nowrap`}>
+        <div className="flex justify-end mr-[5%] md:mr-[0]">
+          <NavLink to="/add-product">
+            <button className="btn bg-[#597D35] text-white">
+              Add Product
+            </button>
+          </NavLink>
+        </div>
+        <div className="mt-5 overflow-x-auto whitespace-nowrap">
+          <table className="table w-full">
             <tbody>
               {
-                productsList.map((item: TProducts) => <tr key={item._id}>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-14 w-14">
-                          <img
-                            src={item.image}
-                            alt={item.title} />
+                productsList.map((item: TProducts) => {
+                  return <tr key={item._id}>
+                    <td>
+                      <div className="flex items-center gap-3 mr-5">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-14 w-14">
+                            <img
+                              src={item.image}
+                              alt={item.title} />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-semibold text-[16px] text-serif text-[#597D35]">
+                            {
+                              item.title.length > 20 ? <p>{item.title.slice(0, 20)}...</p> : <p>{item.title}</p>
+                            }
+                          </div>
+                          <div className="text-sm opacity-80">{item.category}</div>
                         </div>
                       </div>
-                      <div>
-                        <div className="font-semibold text-lg text-serif text-[#597D35]">{item.title}</div>
-                        <div className="text-sm opacity-80">{item.category}</div>
+                    </td>
+
+                    <td>
+                      <div className="flex items-center">
+                        <TbCurrencyTaka className="text-red-500 size-6"></TbCurrencyTaka>
+                        <p className="text-lg font-semibold">{item.price}</p>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td>
-                    <div className="flex items-center">
-                      <TbCurrencyTaka className="text-red-500 size-6"></TbCurrencyTaka>
-                      <p className="text-lg font-semibold">{item.price}</p>
-                    </div>
-                  </td>
+                    <td>
+                      <button
+                        onClick={() => editModal(item)}
+                        className="btn btn-ghost hover:bg-transparent hover:text-[#e2b457] btn-xs"><FaRegEdit size={20}></FaRegEdit>
+                      </button>
+                    </td>
 
-                  <td>
-                    <button
-                      onClick={() => editModal(item)}
-                      className="btn btn-ghost hover:bg-transparent hover:text-[#e2b457] btn-xs"><FaRegEdit size={20}></FaRegEdit>
-                    </button>
-                  </td>
-
-                  <td>
-                    <button onClick={() => deleteItem(item._id)} className="btn btn-ghost hover:bg-transparent hover:text-red-500 btn-xs"><FaRegTrashAlt size={20}></FaRegTrashAlt></button>
-                  </td>
-                </tr>)
+                    <td>
+                      <button onClick={() => deleteItem(item._id)} className="btn btn-ghost hover:bg-transparent hover:text-red-500 btn-xs"><FaRegTrashAlt size={20}></FaRegTrashAlt></button>
+                    </td>
+                  </tr>
+                }
+                )
               }
             </tbody>
           </table>
