@@ -16,8 +16,8 @@ const AddToCart = () => {
     return (
         <div className="max-w-7xl mx-auto my-10">
 
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div className="overflow-x-auto whitespace-nowrap overflow-hidden">
+                <table className="table w-full">
                     {/* head */}
                     <thead>
                     </thead>
