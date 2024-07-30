@@ -43,7 +43,7 @@ const Products = () => {
         <h1 className="ml-2 md:ml-0 text-2xl md:text-4xl font-serif md:my-5 font-semibold text-[#597D35]">All Products</h1>
 
         <div className="dropdown dropdown-hover">
-          <div tabIndex={0} role="button" className="flex items-center justify-center w-[70px] h-[35px] rounded-md m-1 bg-[#597D35] hover:bg-[#e2b457] text-white text-lg">Filter <FaFilter size={16}></FaFilter></div>
+          <div tabIndex={0} role="button" className="flex items-center justify-center w-[50px] h-[30px] rounded-md m-1 border border-[#597D35] hover:text-[#e2b457] text-[#597D35] text-lg"><FaFilter size={16}></FaFilter></div>
           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box -ml-[70px] z-[1] shadow">
             <li>
               <button onClick={() => getFilteredProducts('lessThenHundred')}>Less 100 TK</button>

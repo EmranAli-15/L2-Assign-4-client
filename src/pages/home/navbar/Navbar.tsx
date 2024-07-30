@@ -42,7 +42,7 @@ const Navbar = () => {
                     </form>
                 </div>
 
-                <div className="navbar-end flex items-center gap-x-12">
+                <div className="navbar-end flex items-center gap-x-10">
                     <NavLink to="/cart">
                         <button className="relative">
                             <div className="badge bg-[#597D35] text-white font-semibold absolute translate-x-1/2 -translate-y-2">{products.length}</div>
@@ -52,7 +52,7 @@ const Navbar = () => {
                     <button>
                         <NavLink to="/product-list">
                             <div className="flex items-center justify-center mb-1 rounded-full border border-[#597D35] p-1">
-                                <RiUserSettingsFill className="text-[#e2b457] size-5 md:size-9"></RiUserSettingsFill>
+                                <RiUserSettingsFill className="text-[#e2b457] size-5 md:size-8"></RiUserSettingsFill>
                             </div>
                         </NavLink>
                     </button>

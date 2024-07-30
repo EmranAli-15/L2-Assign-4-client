@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../redux/features/products/productsApi";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SingleProductLoader from "../../loader/SingleProductLoader";
 import ReactStars from 'react-rating-star-with-type'
 import { useAppDispatch } from "../../redux/hooks";
@@ -21,7 +21,8 @@ const SingleProduct = () => {
         if (type == 'inc') {
             setNum(prev => prev + 1);
         }
-    }
+    };
+
 
     const dispatch = useAppDispatch();
 
@@ -94,7 +95,11 @@ const SingleProduct = () => {
 
             </div>
         </>
-    }
+    };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
 
     return (
         <div className="max-w-7xl mx-auto my-20">
