@@ -3,6 +3,7 @@ import brandLogo from '../../../assets/brandLogo.png'
 import { FormEvent, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
+import { RiUserSettingsFill } from "react-icons/ri";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -50,10 +51,8 @@ const Navbar = () => {
                     </NavLink>
                     <button>
                         <NavLink to="/product-list">
-                            <div className="avatar">
-                                <div className="w-10 md:w-12 rounded-full">
-                                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                </div>
+                            <div className="flex items-center justify-center mb-1 rounded-full border border-[#597D35] p-1">
+                                <RiUserSettingsFill className="text-[#e2b457] size-5 md:size-9"></RiUserSettingsFill>
                             </div>
                         </NavLink>
                     </button>
